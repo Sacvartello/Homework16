@@ -13,12 +13,11 @@ console.log('userInfo1', userInfo1);
 const userInfo2 = {
     userName : 'Vova',
     userSurname : 'Tumovuch',
-    userFullName : function (){
-        return `${userInfo2.userName} ${userInfo2.userSurname}`
-    },
 };
-
-const greetingForUser2 = userInfo2.userFullName()
+function userFullName(obj){
+    return `${obj.userName} ${obj.userSurname}`
+}
+const greetingForUser2 = userFullName(userInfo2)
 console.log('Доброго дня,', greetingForUser2);
 //3
 const userInfo3 = {
@@ -44,21 +43,21 @@ const car = {
     maxSpeed : 240,
     accelerate : function (addSpeed){
         if (this.curentSpeed+addSpeed <= this.maxSpeed){
-            car.curentSpeed = car.curentSpeed + addSpeed
+            this.curentSpeed = this.curentSpeed + addSpeed
         } else {
-            console.log(`ПОМИЛКА! Швидкість не вдалось збільшити, не дозволено мати швидкість більше ніж ${maxSpeed}`);
-        }
-    },
-    deaccelerate : function (reduceSpeed) {
-        if (this.curentSpeed-reduceSpeed >= 0){
-            car.curentSpeed = car.curentSpeed - reduceSpeed
-        } else {
-            console.log(`ПОМИЛКА! Швидкість не вдалось зменшити, не дозволено мати швидкість меншу за 0`);
+            this.curentSpeed = this.maxSpeed
         }
     },
     stop : function (){
         car.curentSpeed = 0
-    }
+    },
+    deaccelerate : function (reduceSpeed) {
+        if (this.curentSpeed-reduceSpeed >= 0){
+            this.curentSpeed = this.curentSpeed - reduceSpeed
+        } else {
+            this.curentSpeed = 0
+        }
+    },
 }
 car.accelerate(40)
 console.log(`Швидкість: ${car.curentSpeed} км/год`);
